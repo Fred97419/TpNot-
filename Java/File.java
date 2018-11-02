@@ -20,7 +20,9 @@ public class File {
 
     }
 
-    public synchronized void ajoute(){
+    public synchronized String ajoute(){
+        int nb_alea = alea(0,100);
+        String resultat="";
 
         if(file.size() ==20){
             try{
@@ -30,16 +32,22 @@ public class File {
 
         else {
 
-            file.add(alea(0,100));
+            file.add(nb_alea);
             notifyAll();
+            resultat="Ajout de l'entier "+nb_alea+" ...";
+            return resultat;
+            
 
         }
+
+        return resultat;
         
 
         
 }
 
-    public synchronized void supprime(){
+    public synchronized String supprime(){
+        String resultat="";
 
         if (file.isEmpty()){
             try{
@@ -50,23 +58,34 @@ public class File {
         else {
             file.remove(0);
             notifyAll();
+            resultat = "Retrait de "+file.get(0)+"effectue ! ";
+            return resultat;
+
 
         }
+        return resultat;
 
     }
     
-    public void afficheFile(){
+   
 
-        System.out.print("File : <");
+    public String fileToString(){
+
+        String fileString="";
+
+        fileString+= "File : <";
         for (int i=0 ; i<file.size()-1 ; i++){
 
-            System.out.print(file.get(i) + ",");
+            fileString += (file.get(i)).toString() + "," ;
 
 
         }
 
-        System.out.print(file.get(file.size()-1) + "<");
+        fileString+= (file.get(file.size()-1)).toString() + "<" ;
+        
 
+        return fileString;
+        
     }
 
 
