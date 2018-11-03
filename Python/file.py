@@ -32,5 +32,16 @@ class File ():
                 resultat = "Retrait de "+self.file[0]+" effectue ! "
                 return resultat
             return resultat
+    
+    def fileToString(self):
+        file_string=""
+
+        for e in (self.file[0:-1]):
+            file_string+=  str(e) + ','
+        
+        file_string+= str(self.file[-1])
+
+    
+        
 
 
