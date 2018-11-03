@@ -83,7 +83,7 @@ public class File {
 
         fileString+= (file.get(file.size()-1)).toString() + "<" ;
         
-
+        
         return fileString;
         
     }

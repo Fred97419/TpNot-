@@ -1,5 +1,6 @@
 from tkinter import *
 from threading import Thread
+from file import File
 import time
 import sys
 
@@ -48,27 +49,29 @@ class Consommateur (Thread):
         return self.texte
 
 
-
 def start():
-    file = File()
-    prod = Producteur(100,file)
-    cons1 = new Consommateur(300,file)
-    cons2 = new Consommateur(300, file)
-    started = true
-    prod.start()
-    cons1.start()
-    cons2.start()
-
-
+    started = True
 
 fenetre = Tk()
 
-file_text=Label(fenetre,text="test1")
-producteur = Label(fenetre,text="test1")
-c1 = Label(fenetre,text="test1")
-c2 = Label(fenetre,text="test1")
-bouton = Button(fenetre, text="Start", command=fenetre.quit)
+started = False
 
+file = File()
+prod = Producteur(0.3,file)
+cons1 =  Consommateur(0.6,file)
+cons2 =  Consommateur(0.6, file)
+started = True
+prod.setDaemon(True)
+cons1.setDaemon(True)
+cons2.setDaemon(True)
+prod.start()
+cons1.start()
+cons2.start()
+
+file_text=Label(fenetre, text="")
+producteur=Label(fenetre,text="")
+c1=Label(fenetre,text="")
+c2=Label(fenetre,text="")
 
 file_text.pack()
 producteur.pack()
@@ -76,7 +79,20 @@ c1.pack()
 c2.pack()
 
 
-fenetre.mainloop()
+while(True):
+    if (started):
+        file_text["text"]=file.fileToString()
+        producteur["text"]=prod.getTexte()
+        c1["text"]=cons1.getTexte()
+        c2["text"]=cons2.getTexte()
+
+        fenetre.update()
+    time.sleep(0.2)
+    
+    
+    
+
+
 
 
 

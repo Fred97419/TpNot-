@@ -1,6 +1,7 @@
 from random import randint
 from threading import Condition
 
+
 class File ():
 
     def __init__(self):
@@ -17,7 +18,7 @@ class File ():
             else:
                 self.file.append(nb_alea)
                 self.cond.notify_all()
-                resultat="Ajout de l'entier "+nb_alea+" ..."
+                resultat="Ajout de l'entier "+str(nb_alea)+" ..."
                 return resultat
             return resultat
     
@@ -27,19 +28,20 @@ class File ():
             if (len(self.file) ==0):
                 self.cond.wait()
             else :
-                self.file.pop()
+                del self.file[0]
                 self.cond.notify_all()
-                resultat = "Retrait de "+self.file[0]+" effectue ! "
+                resultat = "Retrait de "+str(self.file[0])+" effectue ! "
                 return resultat
-            return resultat
+            
     
     def fileToString(self):
-        file_string=""
+        file_string="<"
 
-        for e in (self.file[0:-1]):
-            file_string+=  str(e) + ','
+        for i in range (0,len(self.file)):
+            file_string+=str(self.file[i])+","
         
-        file_string+= str(self.file[-1])
+        file_string+="<"
+        return file_string
 
     
         
