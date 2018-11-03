@@ -49,34 +49,39 @@ class Consommateur (Thread):
         return self.texte
 
 
-def start():
-    started = True
+
 
 fenetre = Tk()
 
 started = False
 
+def start():
+    global started
+    started = True
+    prod.start()
+    cons1.start()
+    cons2.start()
+
 file = File()
 prod = Producteur(0.3,file)
 cons1 =  Consommateur(0.6,file)
 cons2 =  Consommateur(0.6, file)
-started = True
 prod.setDaemon(True)
 cons1.setDaemon(True)
 cons2.setDaemon(True)
-prod.start()
-cons1.start()
-cons2.start()
+
 
 file_text=Label(fenetre, text="")
 producteur=Label(fenetre,text="")
 c1=Label(fenetre,text="")
 c2=Label(fenetre,text="")
+b=Button(fenetre , text="start" , command = start)
 
 file_text.pack()
 producteur.pack()
 c1.pack()
 c2.pack()
+b.pack()
 
 
 while(True):
@@ -86,7 +91,9 @@ while(True):
         c1["text"]=cons1.getTexte()
         c2["text"]=cons2.getTexte()
 
-        fenetre.update()
+    fenetre.update()
+
+
     time.sleep(0.2)
     
     
