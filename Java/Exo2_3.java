@@ -119,10 +119,13 @@ public class Exo2_3 extends JFrame {
               
                 file = new File();
                 prod = new Producteur(100,file);
-                cons1 = new Consommateur(300,file);
-                cons2 = new Consommateur(300, file);
+                cons1 = new Consommateur(400,file);
+                cons2 = new Consommateur(400, file);
 
                 started = true;
+                prod.setDaemon(true);
+                cons1.setDaemon(true);
+                cons2.setDaemon(true);
                 prod.start();
                 cons1.start();
                 cons2.start();
