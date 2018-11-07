@@ -113,19 +113,21 @@ public class Exo2_3 extends JFrame {
         c1 = new JLabel();
         c2 = new JLabel();
         start = new JButton("Start");
+        file = new File();
+        prod = new Producteur(100,file);
+        cons1 = new Consommateur(400,file);
+        cons2 = new Consommateur(400, file);
+        prod.setDaemon(true);
+        cons1.setDaemon(true);
+        cons2.setDaemon(true);
 
         start.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) { 
               
-                file = new File();
-                prod = new Producteur(100,file);
-                cons1 = new Consommateur(400,file);
-                cons2 = new Consommateur(400, file);
+               
 
                 started = true;
-                prod.setDaemon(true);
-                cons1.setDaemon(true);
-                cons2.setDaemon(true);
+                
                 prod.start();
                 cons1.start();
                 cons2.start();
